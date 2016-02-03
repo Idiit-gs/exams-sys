@@ -17,8 +17,15 @@ use Examsys\Api\Orm\OrmManager;
 use Examsys\Api\DB\ORM;
 
 # SETUP
+$configuration = [
+    'settings' => [
+        'displayErrorDetails' => true,
+    ],
+];
 
-$app = new Slim\App();
+$config = new \Slim\Container($configuration);
+
+$app = new Slim\App($config);
 
 $db = new ORM();
 
@@ -33,7 +40,11 @@ $app->any("/", function($request, $response, $args){
 
 $loginController = new LoginController($ormManager);
 
-$app->post("/login", function($request, $response, $args){
+$app->post("/login", function($request, $response, $args) use($app) {
+	$username = $request->getQueryParams()["username"];
+	$password = $request->getQueryParams()["password"];
+	
+	return array("username"=>$username, "password"=>$password);
 
 })->add( $loginController );
 

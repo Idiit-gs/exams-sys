@@ -20,16 +20,16 @@ class LoginController implements ApiInterface {
 	}
 
 	public function __invoke($request, $response, $next_callable) {
-		$username = $request->post("username");
-		$password = $request->post("password");
+		$response = $next_callable($request, $response);
+
+		$username = json_decode($response)["username"];
+		$password = json_decode($response)["password"];
 
 		$isCredentialsValid = $this->isCredentialsValid($username, $password);
 
-		$response->getBody()->write($isCredentialsValid);
+		$response->getBody()->write(json_encode($isCredentialsValid));
 
-		$response = $next_callable($request, $response);
-
-		return json_encode($response, JSON_FORCE_OBJECT);
+		return $response;
 	}
 
 	protected function isCredentialsValid($username, $password) {
@@ -37,9 +37,9 @@ class LoginController implements ApiInterface {
 	}
 
 	private function validateCredentials($username, $password) {
-		$user = $this->db->getPassword($username);
+		$userPassword = $this->db->getPassword($username);
 
-		return $password === $user["password"];
+		return $password == $userPassword;
 	}
 }
 

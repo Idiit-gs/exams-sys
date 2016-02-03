@@ -17,9 +17,10 @@ class ORM {
 		//connect to db
 	}
 
-	protected function getPassword($user) {
+	public function getPassword($user) {
 		//retrieve user password
-	};
+		return "12";
+	}
 }
 
 ?>
