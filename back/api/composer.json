@@ -1,6 +1,26 @@
 {
-	"author": "Samuel Adeshina <samueladeshina73@gmail.com> <idiitgs-dev@gmail.com>",
+	"name": "Examsys/API",
+    "description": "API for the Examsys Project",
+    "type": "package",
+    "homepage": "http://www.idiit-gs.com",
+    "license": "MIT",
+    "support": {
+        "source": "https://github.com/idiit-gs/examsys/backend/api"
+    },
+    "authors": [
+        {
+            "name": "Samuel Adeshina",
+            "email": "samueladeshina73@gmail.com"
+        }
+    ],
     "require": {
         "slim/slim": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Examsys\\Api\\": "./src",
+            "Examsys\\Api\\Orm\\": "./src",
+            "Examsys\\Api\\DB\\": "./src"
+        }
     }
 }
