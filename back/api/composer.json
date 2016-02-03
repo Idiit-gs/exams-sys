@@ -1,0 +1,6 @@
+{
+	"author": "Samuel Adeshina <samueladeshina73@gmail.com> <idiitgs-dev@gmail.com>",
+    "require": {
+        "slim/slim": "^3.0"
+    }
+}
