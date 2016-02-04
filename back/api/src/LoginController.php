@@ -15,8 +15,10 @@ namespace Examsys\Api;
 class LoginController implements ApiInterface {
 	protected $db;
 
-	public function __construct(\Examsys\Api\Orm\OrmManager $ormManager) {
-		$this->db = $ormManager->getORM();
+	public function __construct(\Examsys\Api\Orm\OrmManager $ormManager = null) {
+		if ($ormManager != null) {
+			$this->db = $ormManager->getORM();
+		}
 	}
 
 	public function __invoke($request, $response, $next_callable) {
