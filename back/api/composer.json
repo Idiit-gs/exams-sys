@@ -19,6 +19,7 @@
     "autoload": {
         "psr-4": {
             "Examsys\\Api\\": "./src",
+            "Examsys\\Api\\Request\\": "./src",
             "Examsys\\Api\\Orm\\": "./src",
             "Examsys\\Api\\DB\\": "./src"
         }

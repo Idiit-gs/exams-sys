@@ -9,7 +9,7 @@
 * @version 0.1
 */
 
-namespace Examsys\Api;
+namespace Examsys\Api\Request;
 
 interface ApiInterface {
 

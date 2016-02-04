@@ -12,9 +12,11 @@
 # IMPORT
 require __DIR__."/vendor/autoload.php";
 
-use Examsys\Api\LoginController;
+use Examsys\Api\Request\LoginController;
 use Examsys\Api\Orm\OrmManager;
 use Examsys\Api\DB\ORM;
+use Examsys\Api\ParamHandler;
+use Examsys\Api\Messages;
 
 # SETUP
 $configuration = [
@@ -33,7 +35,7 @@ $ormManager = new OrmManager();
 $ormManager->setORM($db);
 
 $app->any("/", function($request, $response, $args){
-	//handle requests to the root level directory
+	//handle request to the root level directory
 });
 
 # LOGIN
@@ -41,9 +43,16 @@ $app->any("/", function($request, $response, $args){
 $loginController = new LoginController($ormManager);
 
 $app->post("/login", function($request, $response, $args) use($app) {
-	$username = $request->getQueryParams()["username"];
-	$password = $request->getQueryParams()["password"];
-	
+	if (
+		ParamHandler::isParamExists($request->getQueryParams()["username"]) &&
+		ParamHandler::isParamExists($request->getQueryParams()["password"])
+	) {
+		$username = $request->getQueryParams()["username"];
+		$password = $request->getQueryParams()["password"];
+	}
+	else {
+		throw new \Exception(Messages::LOGIN_BAD_PARAMETER_ERROR);
+	}
 	return array("username"=>$username, "password"=>$password);
 
 })->add( $loginController );
