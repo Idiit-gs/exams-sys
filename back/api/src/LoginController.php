@@ -12,6 +12,8 @@
 
 namespace Examsys\Api\Request;
 
+use Examsys\Api\ParamHandler;
+
 class LoginController implements ApiInterface {
 	protected $db;
 
@@ -24,8 +26,14 @@ class LoginController implements ApiInterface {
 	public function __invoke($request, $response, $next_callable) {
 		$response = $next_callable($request, $response);
 
-		$username = json_decode($response)["username"];
-		$password = json_decode($response)["password"];
+		$username = ParamHandler::isParamExists(json_decode($response)["username"]) ?
+					json_decode($response)["username"] : null;
+		$password = ParamHandler::isParamExists(json_decode($response)["password"]) ?
+					json_decode($response)["password"] : null;
+
+		if ($username === null && $password === null) {
+			return json_decode($response);
+		}
 
 		$isCredentialsValid = $this->isCredentialsValid($username, $password);
 

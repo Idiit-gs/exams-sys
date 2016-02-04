@@ -51,6 +51,10 @@ $app->post("/login", function($request, $response, $args) use($app) {
 		$password = $request->getQueryParams()["password"];
 	}
 	else {
+		/**
+		 * @todo inject a custom exception handler in here.
+		 * \BadParameterException ?
+		 */
 		throw new \Exception(Messages::LOGIN_BAD_PARAMETER_ERROR);
 	}
 	return array("username"=>$username, "password"=>$password);
