@@ -21,7 +21,9 @@
             "Examsys\\Api\\": "./src",
             "Examsys\\Api\\Request\\": "./src",
             "Examsys\\Api\\Orm\\": "./src",
-            "Examsys\\Api\\DB\\": "./src"
+            "Examsys\\Api\\DB\\": "./src",
+            "Plug\\Framework\\DBAL\\Connection\\" : "./src/DBAL/Connection",
+            "Plug\\Framework\\DBAL\\QueryBuilder\\" : "./src/DBAL/QueryBuilder"
         }
     }
 }

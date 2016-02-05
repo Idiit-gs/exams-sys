@@ -14,7 +14,8 @@ namespace Examsys\Api;
 class ParamHandler {
 
 	public static function isParamExists($param) {
-		return (isset($param) && $param !== null);
+		//echo $param;
+		return true;
 	}
 }
 

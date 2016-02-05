@@ -12,14 +12,29 @@
 
 namespace Examsys\Api\DB;
 
+use Plug\Framework\DBAL\QueryBuilder\QueryBuilder as QueryBuilder;
+use Plug\Framework\DBAL\Connection\Query as Query;
+
 class ORM {
+	private $queryBuilder;
+	private $db_location;
+
 	public function __construct() {
 		//connect to db
+		$this->db_location = $_SERVER["DOCUMENT_ROOT"]."/temp/data.db";
+		$this->queryBuilder = new QueryBuilder();
 	}
 
 	public function getPassword($user) {
-		//retrieve user password
-		return "12";
+		$queryBuilder = $this->queryBuilder;
+		$query_string = $queryBuilder
+							->select("password")
+							->from("users")
+							->where("username = '$user'")
+							->build();
+		$query = new Query($query_string, $this->db_location);
+
+		return $query->result();
 	}
 }
 

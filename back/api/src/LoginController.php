@@ -25,19 +25,16 @@ class LoginController implements ApiInterface {
 
 	public function __invoke($request, $response, $next_callable) {
 		$response = $next_callable($request, $response);
+		print_r($response);
 
-		$username = ParamHandler::isParamExists(json_decode($response)["username"]) ?
-					json_decode($response)["username"] : null;
-		$password = ParamHandler::isParamExists(json_decode($response)["password"]) ?
-					json_decode($response)["password"] : null;
-
-		if ($username === null && $password === null) {
-			return json_decode($response);
-		}
+		$username = $request->getQueryParams()["username"];
+		$password = $request->getQueryParams()["password"];
 
 		$isCredentialsValid = $this->isCredentialsValid($username, $password);
 
 		$response->getBody()->write(json_encode($isCredentialsValid));
+
+		$response = $response->withHeader("Content-Type", "application/json");
 
 		return $response;
 	}
@@ -49,7 +46,7 @@ class LoginController implements ApiInterface {
 	private function validateCredentials($username, $password) {
 		$userPassword = $this->db->getPassword($username);
 
-		return $password == $userPassword;
+		return $userPassword;
 	}
 }
 
