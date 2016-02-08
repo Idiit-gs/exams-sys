@@ -32,7 +32,8 @@ class Query
 		{
 			$this->statement_query_object = self::preparedStatementQuery();
 		}
-		else if (false !== is_string($sql_statement_object))
+		
+		if (false !== is_string($sql_statement_object))
 		{
 			$trimmed_string = trim(rtrim($sql_statement_object, " "), " ");
 			$select_substring = substr(strtolower($trimmed_string), 0, 6);
@@ -73,15 +74,17 @@ class Query
 
 	private function normalStatementQuery($is_select)
 	{
+		$db_connection = self::getDatabaseConnection();
 		if (!$is_select)
 		{
-			$query_result = self::getDatabaseConnection()->exec($this->sql_statement_object);			
+			$query_result = $db_connection->exec($this->sql_statement_object);			
 		}
 		else
 		{
-			$query_result = self::getDatabaseConnection()->query($this->sql_statement_object);
+			$query_result = $db_connection->query($this->sql_statement_object)->fetchall();
 		}
-		return $query_result;
+		$error = $db_connection->errorInfo();
+		return array($query_result, $error, $db_connection->lastInsertId());
 	}
 
 	private function getDatabaseConnection()

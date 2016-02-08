@@ -14,7 +14,8 @@
         }
     ],
     "require": {
-        "slim/slim": "^3.0"
+        "slim/slim": "^3.0",
+        "zircote/swagger-php": "*"
     },
     "autoload": {
         "psr-4": {

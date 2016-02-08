@@ -13,7 +13,8 @@ namespace Examsys\Api;
 
 class Messages {
 
-	const LOGIN_BAD_PARAMETER_ERROR = "A username and password must be provided as post variables in o";
+	const LOGIN_BAD_PARAMETER_ERROR = "A username and password must be provided as post variables in other to continue";
+	const INVALID_LOGIN_DETAIL = "Invalid login detail supplied. Please try again or ask for help";
 }
 
 ?>

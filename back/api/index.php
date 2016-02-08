@@ -19,15 +19,15 @@ use Examsys\Api\ParamHandler;
 use Examsys\Api\Messages;
 
 # SETUP
-$configuration = [
+/*$configuration = [
     'settings' => [
         'displayErrorDetails' => true,
     ],
 ];
 
 $config = new \Slim\Container($configuration);
-
-$app = new Slim\App($config);
+*/
+$app = new Slim\App(); //$config
 
 $db = new ORM();
 
@@ -42,7 +42,7 @@ $app->any("/", function($request, $response, $args){
 
 $loginController = new LoginController($ormManager);
 
-$app->get("/login", function($request, $response, $args) use($app) {
+$app->post("/login", function($request, $response, $args) use($app) {
 	if (
 		ParamHandler::isParamExists($request->getQueryParams()["username"]) &&
 		ParamHandler::isParamExists($request->getQueryParams()["password"])

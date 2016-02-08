@@ -27,19 +27,19 @@ class Connection
 		*/
 	}
 
-	public static function setDsn(string $dsn)
+	public static function setDsn($dsn)
 	{
 		self::$dsn = $dsn;
 		return;
 	}
 
-	public static function setUsername(string $username)
+	public static function setUsername($username)
 	{
 		self::$username = $username;
 		return;
 	}
 
-	public static function setPassword(string $password)
+	public static function setPassword($password)
 	{
 		self::$password = $password;
 		return;
@@ -60,6 +60,7 @@ class Connection
 				return self::$database_handler;
 			}
 			self::$database_handler = new \PDO(self::$dsn, self::$username, self::$password);
+			//self::$database_handler->setAttribute( \PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING );
 			return self::$database_handler;
 		}
 		catch(\PDOException $pdo_exception)

@@ -34,7 +34,7 @@ class QueryBuilder implements BuildableInterface
 	/**
 	 * Constructor
 	*/
-	public function __construct(string $query_string = null)
+	public function __construct($query_string = null)
 	{
 		//Initialize the $query_string object
 		$this->query_string = $query_string;
@@ -62,7 +62,7 @@ class QueryBuilder implements BuildableInterface
 	 * @param string $query_string
 	 * @return array
 	 */
-	public function bindParam(string $query_string, ...$params)
+	public function bindParam($query_string, ...$params)
 	{
 		if (empty($params))
 		{
@@ -76,7 +76,7 @@ class QueryBuilder implements BuildableInterface
 	 *
 	 * @return void
 	*/
-	private function appendToQueryString(string $string, $trim_comma = false)
+	private function appendToQueryString($string, $trim_comma = false)
 	{
 		if ($trim_comma === true)
 		{
@@ -100,7 +100,7 @@ class QueryBuilder implements BuildableInterface
 	 * @return void
 	 * @example select("first_name", "last_name")
 	*/
-	public function select(string ...$select_options)
+	public function select(...$select_options)
 	{
 		//was there any parameter?
 		if (empty($select_options))
@@ -135,7 +135,7 @@ class QueryBuilder implements BuildableInterface
 	 * @param variadic string|null $select_options Specify as many parameters as is possible
 	 * @return void
 	*/
-	public function from(string ...$from_options)
+	public function from(...$from_options)
 	{
 		//was there any parameter?
 		if (empty($from_options))
@@ -168,7 +168,7 @@ class QueryBuilder implements BuildableInterface
 	 * @param string $where_option
 	 * @return QueryBuilder new instance of the QueryBuilder object
 	*/
-	public function where(string $where_option)
+	public function where($where_option)
 	{
 		//was there any parameter?
 		if (empty($where_option))
@@ -202,7 +202,7 @@ class QueryBuilder implements BuildableInterface
 	 * @param QueryBuilder|null 
 	 * @return QueryBuilder a new instance of this object
 	 */
-	public function into(string $into_option, $query_builder_columns_object = null)
+	public function into($into_option, $query_builder_columns_object = null)
 	{
 		//was there any parameter?
 		if (empty($into_option))
@@ -221,7 +221,7 @@ class QueryBuilder implements BuildableInterface
 		return new QueryBuilder($this->query_string);
 	}
 
-	public static function columns(string ...$column_options)
+	public static function columns(...$column_options)
 	{
 		//was there any parameter?
 		if (empty($column_options))
@@ -234,7 +234,7 @@ class QueryBuilder implements BuildableInterface
 		return $columns;
 	}
 
-	public function values(string ...$values_options)
+	public function values(...$values_options)
 	{
 		if (empty($values_options))
 		{
@@ -257,21 +257,21 @@ class QueryBuilder implements BuildableInterface
 
 
 
-	public function update(string $update_option)
+	public function update($update_option)
 	{
 		if (empty($update_option))
 		{
 			return;
 		}
 
-		$update_string = "UPDATE TABLE ".$update_option." SET";
+		$update_string = "UPDATE ".$update_option." SET";
 
 		$this->appendToQueryString($update_string);
 
 		return new QueryBuilder($this->query_string);
 	}
 
-	public function set(string $set_option_name, string $set_option_value)
+	public function set($set_option_name, $set_option_value)
 	{
 		$set_option_value = is_numeric($set_option_value) ? $set_option_value : "'".$set_option_value."'";
 		$set_option = $set_option_name." = ".$set_option_value.",";
@@ -281,7 +281,7 @@ class QueryBuilder implements BuildableInterface
 		return new QueryBuilder($this->query_string);
 	}
 
-	public function delete(string $delete_option)
+	public function delete($delete_option)
 	{
 		if (empty($delete_option))
 		{

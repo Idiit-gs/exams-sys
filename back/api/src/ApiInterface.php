@@ -15,7 +15,7 @@ interface ApiInterface {
 
 	public function __construct(\Examsys\Api\Orm\OrmManager $ormManager);
 
-	public function __invoke($request, $response, $callable);
+	//public function __invoke($request, $response, $callable);
 }
 
 ?>
