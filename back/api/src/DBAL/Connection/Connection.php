@@ -65,8 +65,7 @@ class Connection
 		}
 		catch(\PDOException $pdo_exception)
 		{
-			throw new \Exception();
-			print_r($pdo_exception);
+			throw new \Exception($pdo_exception);
 			/**
 			 * @todo Do something about this error
 			*/

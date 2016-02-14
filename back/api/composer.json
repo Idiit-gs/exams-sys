@@ -15,16 +15,17 @@
     ],
     "require": {
         "slim/slim": "^3.0",
-        "zircote/swagger-php": "*"
+        "palanik/corsslim": "*"
     },
     "autoload": {
         "psr-4": {
             "Examsys\\Api\\": "./src",
-            "Examsys\\Api\\Request\\": "./src",
-            "Examsys\\Api\\Orm\\": "./src",
+            "Examsys\\Api\\Request\\": "./src/controllers",
+            "Examsys\\Api\\Utils\\": "./src/utilities",
             "Examsys\\Api\\DB\\": "./src",
             "Plug\\Framework\\DBAL\\Connection\\" : "./src/DBAL/Connection",
-            "Plug\\Framework\\DBAL\\QueryBuilder\\" : "./src/DBAL/QueryBuilder"
+            "Plug\\Framework\\DBAL\\QueryBuilder\\" : "./src/DBAL/QueryBuilder",
+            "CorsSlim\\": "./vendor/CorsSlim-master/CorsSlim"
         }
     }
 }

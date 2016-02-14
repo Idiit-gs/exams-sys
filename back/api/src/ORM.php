@@ -21,7 +21,7 @@ class ORM {
 
 	public function __construct() {
 		//connect to db
-		$this->db_location = $_SERVER["DOCUMENT_ROOT"]."/src/DBAL/database";
+		$this->db_location = __DIR__."/DBAL/Connection/Datastore.db";
 	}
 
 	public function getQueryBuilder() {
@@ -36,7 +36,6 @@ class ORM {
 		if ($error != "") {
 			throw new \Exception($error);
 		}
-
 		return array("result"=>$query->result()[0], "lastInsertId"=>$query->result()[2]);
 	}
 
@@ -143,7 +142,7 @@ class ORM {
 			$query_string = $query_string->where($condition);
 		}
 
-		$query_string = $queryBuilder->build();
+		$query_string = $query_string->build();
 
 		$result = $this->run($query_string);
 		return $result;

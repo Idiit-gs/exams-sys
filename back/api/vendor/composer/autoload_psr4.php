@@ -12,8 +12,9 @@ return array(
     'Plug\\Framework\\DBAL\\Connection\\' => array($baseDir . '/src/DBAL/Connection'),
     'Interop\\Container\\' => array($vendorDir . '/container-interop/container-interop/src/Interop/Container'),
     'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
-    'Examsys\\Api\\Request\\' => array($baseDir . '/src'),
-    'Examsys\\Api\\Orm\\' => array($baseDir . '/src'),
+    'Examsys\\Api\\Utils\\' => array($baseDir . '/src/utilities'),
+    'Examsys\\Api\\Request\\' => array($baseDir . '/src/controllers'),
     'Examsys\\Api\\DB\\' => array($baseDir . '/src'),
     'Examsys\\Api\\' => array($baseDir . '/src'),
+    'CorsSlim\\' => array($vendorDir . '/CorsSlim-master/CorsSlim'),
 );
