@@ -1,5 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-module.exports = angular.module("Examsys", ["ngCookies"]);
+module.exports = angular
+.module("Examsys", ["ngCookies"]);
+
 },{}],2:[function(require,module,exports){
 var app = require("./app-module.js");
 
@@ -41,24 +43,24 @@ app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", 
 	});
 
 	$scope.loadCourse = function(course_id, course_name, course_desc){
-		showLoadingAnim();
-		var session = $scope.SESSION;
-		if (typeof session != "undefined"){
-			$scope.PAGE_TITLE_HEADER = course_name;
-			$scope.PAGE_TITLE_DESC = course_desc;
-			$http.get("http://www.idiit-gs.com/exrec/back/api/score/course?course="+course_id+"&session="+session).success(function(data){
-				var courses = [];
-				for (var i = 0; i < Object.keys(data).length; i++){
-					courses[i] = {"score_info":data[i][0], "student_info":data[i][1]};
-				}
-				$scope.SCORES = courses;
-				$scope.SHOWDASHBOARD = false;
-				$scope.SHOWLOADING = false;
-				$scope.SHOWRESULTS = true;
-			});
-		} else {
-			alert("Please select a session");
+		
+		if (typeof session == "undefined"){
+			$scope.SESSION = 1;
 		}
+		var session = $scope.SESSION;
+		showLoadingAnim();
+		$scope.PAGE_TITLE_HEADER = course_name;
+		$scope.PAGE_TITLE_DESC = course_desc;
+		$http.get("http://www.idiit-gs.com/exrec/back/api/score/course?course="+course_id+"&session="+session).success(function(data){
+			var courses = [];
+			for (var i = 0; i < Object.keys(data).length; i++){
+				courses[i] = {"score_info":data[i][0], "student_info":data[i][1]};
+			}
+			$scope.SCORES = courses;
+			$scope.SHOWDASHBOARD = false;
+			$scope.SHOWLOADING = false;
+			$scope.SHOWRESULTS = true;
+		});
 	};
 	$scope.loadDashboard = function(){
 		$scope.PAGE_TITLE_HEADER = "Dashboard";

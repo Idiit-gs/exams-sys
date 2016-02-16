@@ -32,7 +32,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
         <style>.dev-page{visibility: hidden;}</style>
     </head>
-    <body data-ng-app="Examsys" class="dev-page-boxed">
+    <body data-ng-app="Examsys" class="dev-page-boxed" 
+    >
         <!-- set loading layer -->
         <div class="dev-page-loading preloader"></div>
         <!-- ./set loading layer -->     

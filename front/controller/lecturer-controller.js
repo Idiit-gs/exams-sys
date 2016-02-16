@@ -38,24 +38,24 @@ app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", 
 	});
 
 	$scope.loadCourse = function(course_id, course_name, course_desc){
-		showLoadingAnim();
-		var session = $scope.SESSION;
-		if (typeof session != "undefined"){
-			$scope.PAGE_TITLE_HEADER = course_name;
-			$scope.PAGE_TITLE_DESC = course_desc;
-			$http.get("http://www.idiit-gs.com/exrec/back/api/score/course?course="+course_id+"&session="+session).success(function(data){
-				var courses = [];
-				for (var i = 0; i < Object.keys(data).length; i++){
-					courses[i] = {"score_info":data[i][0], "student_info":data[i][1]};
-				}
-				$scope.SCORES = courses;
-				$scope.SHOWDASHBOARD = false;
-				$scope.SHOWLOADING = false;
-				$scope.SHOWRESULTS = true;
-			});
-		} else {
-			alert("Please select a session");
+		
+		if (typeof session == "undefined"){
+			$scope.SESSION = 1;
 		}
+		var session = $scope.SESSION;
+		showLoadingAnim();
+		$scope.PAGE_TITLE_HEADER = course_name;
+		$scope.PAGE_TITLE_DESC = course_desc;
+		$http.get("http://www.idiit-gs.com/exrec/back/api/score/course?course="+course_id+"&session="+session).success(function(data){
+			var courses = [];
+			for (var i = 0; i < Object.keys(data).length; i++){
+				courses[i] = {"score_info":data[i][0], "student_info":data[i][1]};
+			}
+			$scope.SCORES = courses;
+			$scope.SHOWDASHBOARD = false;
+			$scope.SHOWLOADING = false;
+			$scope.SHOWRESULTS = true;
+		});
 	};
 	$scope.loadDashboard = function(){
 		$scope.PAGE_TITLE_HEADER = "Dashboard";

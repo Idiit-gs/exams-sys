@@ -11,7 +11,6 @@
         <script type="text/javascript" src="<?= BINDIRABSOLUTE."/js/plugins/datatables/jquery.dataTables.min.js"; ?>"></script>        
         <script type="text/javascript" src="<?= BINDIRABSOLUTE."/js/plugins/sortable/sortable.min.js"; ?>"></script>
         
-        
         <script type="text/javascript" src="<?= BINDIRABSOLUTE."/js/dev-loaders.js"; ?>"></script>
         <script type="text/javascript" src="<?= BINDIRABSOLUTE."/js/dev-layout-default.js"; ?>"></script>        
         <script type="text/javascript" src="<?= BINDIRABSOLUTE."/js/dev-app.js"; ?>"></script>

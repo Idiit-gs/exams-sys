@@ -5,7 +5,7 @@
             <a href="#" ng-click="loadDashboard()"><i class="fa fa-desktop"></i> <span>Dashboard</span></a>
         </li>                        
         <li>
-            <a href="#"><i class="fa fa-file-o"></i> <span>Results</span></a>
+            <a href="#"><i class="fa fa-file-o"></i> <span>Courses</span></a>
             <ul>                       
                 <li ng:repeat="course in COURSES"><a ng-click="loadCourse(course.id, course.name, course.description)" ng-href="#/{{course.name}}">{{ course.name }}</a></li>
             </ul>

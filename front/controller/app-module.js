@@ -1,1 +1,2 @@
-module.exports = angular.module("Examsys", ["ngCookies"]);
+module.exports = angular
+.module("Examsys", ["ngCookies"]);

@@ -15,7 +15,7 @@
     <div class="wrapper wrapper-white">
         <div id="result-section" ng-show="SHOWRESULTS">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-sortable table-responsive">
+                <table class="table table-bordered table-striped table-responsive" datatable="ng" dt-options="dtOptions">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -29,16 +29,56 @@
                     </thead>                               
                     <tbody>
                         <tr ng:repeat="score in SCORES">
-                            <td>1</td>
+                            <td>{{$index + 1}}</td>
                             <td>{{score.student_info.id}}</td>
                             <td>{{score.student_info.first_name + " " + score.student_info.last_name}}</td>
                             <td>{{score.score_info.score}}</td>
                             <td>{{score.score_info.grade}}</td>
-                            <td><center><i class="fa fa-edit text-warning" style="font-size: 2em;"></i></center></td>
-                            <td><center><i class="fa fa-close text-danger" style="font-size: 2em;"></i></center></td>
+                            <td><center><a ng-href="#score/edit/{{score.student_info.id}}"><i class="fa fa-edit text-warning" style="font-size: 2em;"></i></a></center></td>
+                            <td><center><a ng-href="#score/delete/{{score.student_info.id}}"><i class="fa fa-close text-danger" style="font-size: 2em;"></i></a></center></td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="form-group-one-unit">
+                <div class="page-subtitle">
+                    <h3>Add a new student</h3>
+                </div>
+               <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group form-group-custom form-control-clear">
+                            <label>Registration No </label>
+                            <input type="text" class="form-control" placeholder="Enter reg. no"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">                        
+                        <div class="form-group form-group-custom form-control-clear">
+                            <label>First Name </label>
+                            <input type="text" placeholder="Enter student first name" class="form-control"/>                                
+                        </div>
+                    </div>
+
+                     <div class="col-md-3">                        
+                        <div class="form-group form-group-custom form-control-clear">
+                            <label>Last Name </label>
+                            <input type="text" placeholder="enter student last name" class="form-control"/>                                
+                        </div>
+                    </div>
+
+                     <div class="col-md-2">                        
+                        <div class="form-group form-group-custom form-control-clear">
+                            <label>Score </label>
+                            <input type="text" placeholder="enter student score" class="form-control"/>                                
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group form-group-custom form-control-clear">
+                            <button type="submit" class="btn btn-default col-md-12">Submit</button>                         
+                        </div>                       
+                    </div>
+                </div>              
             </div>
         </div>
 

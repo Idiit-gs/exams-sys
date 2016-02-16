@@ -12,14 +12,14 @@
     </div>
 
     <ul class="dph-buttons pull-right" >
-        <li style="margin-top: 14px; margin-right: 5px;">
+        <li style="margin-top: 14px; margin-right: 20px;">
             <h2>{{LECTURER_NAME}}</h2>
         </li>
-        <li style="margin-top: 4px; margin-right: 20px;">
+        <!-- <li style="margin-top: 4px; margin-right: 20px;">
             <img 
                 src="<?= BINDIRABSOLUTE.'/assets/images/users/user_2.jpg'; ?>" class="img-responsive img-circle" width="50" height="50"
             />
-        </li>                   
+        </li>    -->                
     </ul>                                                
     
 </div>
