@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <!-- <!-- <div class="container">
     
     <!-- page title -->
     <div class="page-title">
@@ -14,21 +14,39 @@
     <!-- boxed layout -->
     <div class="wrapper wrapper-white">
         <div id="result-section" ng-show="SHOWRESULTS">
+            <div class="col-md-4 pull-right">                        
+                <div class="form-group">
+                    <label class="control-label col-sm-3 col-md-3">Search: </label>
+                    <input type="text" placeholder="type text here to filter the table" class="form-control" ng-model="searchName"/>                                
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-responsive" datatable="ng" dt-options="dtOptions">
                     <thead>
                         <tr>
                             <th>S/N</th>
                             <th>Reg. No</th>
-                            <th>Student Name</th>
-                            <th>Score</th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'name'; sortReverse = !sortReverse">
+                                    Student Name
+                                    <span ng-show="sortType == 'name' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'name' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
+                            <th>
+                                <a href="#" ng-click="sortType = 'score'; sortReverse = !sortReverse">
+                                    Score
+                                    <span ng-show="sortType == 'score' && !sortReverse" class="fa fa-caret-down"></span>
+                                    <span ng-show="sortType == 'score' && sortReverse" class="fa fa-caret-up"></span>
+                                </a>
+                            </th>
                             <th>Grade</th>
                             <th>Edit</th>
                             <th>Delete</th>
                         </tr>
                     </thead>                               
                     <tbody>
-                        <tr ng:repeat="score in SCORES">
+                        <tr ng:repeat="score in SCORES | orderBy:sortType:sortReverse | filter:searchName">
                             <td>{{$index + 1}}</td>
                             <td>{{score.student_info.id}}</td>
                             <td>{{score.student_info.first_name + " " + score.student_info.last_name}}</td>
@@ -103,4 +121,4 @@
         </div>
     </div>
     <!-- ./Copyright -->
-</div>
+</div> --> --> -->

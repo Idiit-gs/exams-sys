@@ -13,6 +13,12 @@ app.factory("userProfile", ["$http", "$cookies", function($http, $cookies){
 app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", "userProfile", function($scope, $http, $cookies, $window, userProfile){
 	var user_type = $cookies.get("user_type");
 	var user_id = $cookies.get("user_id");
+
+	 $scope.sortType     = 'name';
+	 $scope.sortReverse  = false;
+	 $scope.searchName   = '';
+
+
 	$scope.SHOWDASHBOARD = true;
 	$scope.PAGE_TITLE_HEADER = "Dashboard";
 	$scope.PAGE_TITLE_DESC = "Built with you in mind";
@@ -21,7 +27,7 @@ app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", 
 		$scope.LECTURER_NAME = profile.first_name+" "+profile.last_name;
 	});
 
-	$http.get("http://www.idiit-gs.com/exrec/back/api/lecturer/course/"+user_id).success(function(data){
+	$http.get("http://www.idiit-gs.com/exrec/back/api/lecturer/course/"+user_id).success(function(data){ 
 		var courses = [];
 		for (var i = 0; i < Object.keys(data).length; i++){
 			courses[i] = data[i].result[0];
@@ -44,6 +50,7 @@ app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", 
 		}
 		var session = $scope.SESSION;
 		showLoadingAnim();
+		$scope.TSCORES = [];
 		$scope.PAGE_TITLE_HEADER = course_name;
 		$scope.PAGE_TITLE_DESC = course_desc;
 		$http.get("http://www.idiit-gs.com/exrec/back/api/score/course?course="+course_id+"&session="+session).success(function(data){
@@ -57,12 +64,14 @@ app.controller("lecturerController", ["$scope", "$http", "$cookies", "$window", 
 			$scope.SHOWRESULTS = true;
 		});
 	};
+	
 	$scope.loadDashboard = function(){
 		$scope.PAGE_TITLE_HEADER = "Dashboard";
 		$scope.PAGE_TITLE_DESC = "Built with you in mind";
 		$scope.SHOWDASHBOARD = true;
 		$scope.SHOWRESULTS = false;
 	};
+	
 	function showLoadingAnim(){
 		$scope.SHOWDASHBOARD = false;
 		$scope.SHOWRESULTS = false;
