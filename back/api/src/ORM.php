@@ -72,6 +72,17 @@ class ORM {
 		return $result;
 	}
 
+	public function newStudentCourseInfo($user) {
+		$queryBuilder = $this->getQueryBuilder();
+		$query_string = $queryBuilder
+							->insert()
+							->into("student_course_info", "student_id, course_id, reg_number, full_name")
+							->values($user["student_id"],$user["course_id"],$user["reg_number"],$user["full_name"])
+							->build();
+		$result = $this->run($query_string);
+		return $result;
+	}
+
 	public function newCourse($name, $description) {
 		$queryBuilder = $this->getQueryBuilder();
 		$query_string = $queryBuilder

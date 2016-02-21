@@ -1,5 +1,4 @@
-<!-- <!-- <!-- <div class="container">
-    
+<div class="container">
     <!-- page title -->
     <div class="page-title">
         <h1 ng-bind="PAGE_TITLE_HEADER"></h1>
@@ -18,7 +17,7 @@
                 <div class="form-group">
                     <label class="control-label col-sm-3 col-md-3">Search: </label>
                     <input type="text" placeholder="type text here to filter the table" class="form-control" ng-model="searchName"/>                                
-                </div>
+                </div>  
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-responsive" datatable="ng" dt-options="dtOptions">
@@ -61,39 +60,40 @@
             <div class="form-group-one-unit">
                 <div class="page-subtitle">
                     <h3>Add a new student</h3>
+                    <p ng-show="submit-success">New student registered successfully</p>
                 </div>
                <div class="row">
                     <div class="col-md-2">
                         <div class="form-group form-group-custom form-control-clear">
                             <label>Registration No </label>
-                            <input type="text" class="form-control" placeholder="Enter reg. no"/>
+                            <input type="text" class="form-control" placeholder="Enter reg. no" ng-model="reg_num"/>
                         </div>
                     </div>
 
                     <div class="col-md-3">                        
                         <div class="form-group form-group-custom form-control-clear">
                             <label>First Name </label>
-                            <input type="text" placeholder="Enter student first name" class="form-control"/>                                
+                            <input type="text" placeholder="Enter student first name" class="form-control" ng-model="first_name"/>                                
                         </div>
                     </div>
 
                      <div class="col-md-3">                        
                         <div class="form-group form-group-custom form-control-clear">
                             <label>Last Name </label>
-                            <input type="text" placeholder="enter student last name" class="form-control"/>                                
+                            <input type="text" placeholder="enter student last name" class="form-control" ng-model="last_name"/>                                
                         </div>
                     </div>
 
                      <div class="col-md-2">                        
                         <div class="form-group form-group-custom form-control-clear">
                             <label>Score </label>
-                            <input type="text" placeholder="enter student score" class="form-control"/>                                
+                            <input type="text" placeholder="enter student score" class="form-control" ng-model="score"/>                                
                         </div>
                     </div>
 
                     <div class="col-md-2">
                         <div class="form-group form-group-custom form-control-clear">
-                            <button type="submit" class="btn btn-default col-md-12">Submit</button>                         
+                            <button type="submit" class="btn btn-primary btn-lg col-md-12" ng-click="registerNewStudent()">Submit</button>                         
                         </div>                       
                     </div>
                 </div>              
@@ -108,6 +108,67 @@
             <center><img src="<?= BINDIRABSOLUTE.'/img/plugins/blueimp/loading.gif'; ?>"/></center>
            <h2 class="text-info" style="font-style: bold"><center>Loading...</center></h2>
         </div>
+
+        <div id="file-upload-section" ng-show="SHOWFILEUPLOAD">
+
+            <div id="my-dropzone" class="dev-widget alert alert-primary" style="border: 1px solid #ccc !important; height: 200px !important; padding-top: 80px;">
+                <div class="text-center"><span>Drop files in here or click browse to upload a file</span></div>
+            </div>
+
+            <div class="modal fade" style="" id="show-uploaded" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" style="margin-left: 28.3%;">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title" id="largeModalHead">File Uploaded Successfully 
+                        <small>Please verify the content of the file before we save it to the database</small>
+                        <button type="button" class="btn btn-primary btn-lg pull-right" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                        </h4> 
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                           <div class="col-md-4">                        
+                            <div class="form-group">
+                                <label>Course </label>
+                                <select class="form-control">
+                                    <option ng:repeat="course in _COURSES" ng-value="course.id">{{course.name}}</option>
+                                 </select>
+                            </div>
+                           </div>
+                           <div class="col-md-4 pull-right">                        
+                            <div class="form-group">
+                                <label>Semester </label>
+                                 <select class="form-control" ng-options="session.id as session.name for session in SESSIONS" ng-model="SESSION">
+                                    <option>Select session</option>
+                                 </select>
+                            </div>
+                           </div>
+                        </div>
+
+                        <div class="table-responsive"  style="height: 380px !important; overflow-y: scroll">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Reg. No</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Score</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="uploaded-csv-file">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                    </div>
+                    <div class="modal-footer">                    
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
     </div>
     <!-- ./boxed layout -->
     
@@ -121,4 +182,4 @@
         </div>
     </div>
     <!-- ./Copyright -->
-</div> --> --> -->
+</div>

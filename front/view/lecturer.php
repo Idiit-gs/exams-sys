@@ -36,13 +36,7 @@
     <?php
         include __DIR__."/includes/pages/page-footer.php";
     ?> 
-    <!-- ./page footer -->
-    
-    <!-- page search -->
-    <?php
-        include __DIR__."/includes/pages/page-search.php";
-    ?>
-    <!-- page search -->            
+    <!-- ./page footer --> 
 </div>
 <!-- ./page wrapper -->
 <?php

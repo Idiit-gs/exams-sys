@@ -89,6 +89,35 @@ class CourseController {
 		$_courses["course_info"] = $this->getCourseInfo($course["course_id"]);
 		return $_courses;
 	}
+
+	public function newStudentFromCourse($firstname, $lastname, $regno, $score, $course, $session){
+		//REGISTER USER IN USER_INFO TABLE
+		$result = $this->db->newUserInfo(["first_name"=>$firstname, "last_name"=>$lastname]);
+		$user_info = $result["lastInsertId"];
+		//CREATE STUDENT IN USERS TABLE
+		$user_type = $this->giController->convertUserTypeToId("student");
+		$result = $this->db->newUser([
+				"user_type"=>$user_type, "user_info"=>$user_info, "user_name"=>NULL, "email"=>NULL,
+				"phone_number"=>NULL, "password"=>NULL
+			]);
+		$user_id = $result["lastInsertId"];
+		//USE ID RETURNED TO ASSIGN STUDENT COURSE
+		$result = $this->db->assignStudentCourse($user_id, $course);
+		//RECORD SCORES
+		$result = $this->db->newScore([
+				"student_id"=>$user_id, "course_id"=>$course, "session_id"=>$session, 
+				"score"=>$score, "grade"=>"NULL"
+			]);
+		//CREATE STUDENT COURSE INFO
+		$result = $this->db->newStudentCourseInfo([
+				"student_id"=>$user_id,
+				"course_id"=>$course,
+				"reg_number"=>$regno,
+				"full_name"=>"$firstname $lastname"
+			]);
+
+		return $result;
+	}
 }
 
 ?>

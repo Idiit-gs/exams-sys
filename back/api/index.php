@@ -271,6 +271,24 @@ $app->post("/score/new", function($request, $response, $args) use($scoreControll
 	return $response;
 });
 
+$app->post("/course/student/new", function($request, $response, $args) use($courseController) {
+	$info = $request->getQueryParams();
+	$firstname = $info["firstname"];
+	$lastname = $info["lastname"];
+	$regno = $info["regnum"];
+	$score = $info["score"];
+	$course = $info["course"];
+	$session = $info["session"];
+
+	$result = $courseController->newStudentFromCourse($firstname, $lastname, $regno, $score, $course, $session);
+
+	$response->getBody()->write(json_encode($result, JSON_FORCE_OBJECT));
+
+	$response = $response->withHeader("Content-Type", "application/json");
+
+	return $response;
+});
+
 $app->put("/score/edit", function($request, $response, $args) use($scoreController) {
 	$student = $request->getQueryParams()["student"];
 	$course = $request->getQueryParams()["course"];

@@ -7,11 +7,11 @@
         <li>
             <a href="#"><i class="fa fa-file-o"></i> <span>Courses</span></a>
             <ul>                       
-                <li ng:repeat="course in COURSES"><a ng-click="loadCourse(course.id, course.name, course.description)" ng-href="#/{{course.name}}">{{ course.name }}</a></li>
+               <li ng:repeat="course in COURSES"><a ng-click="loadCourse(course.id, course.name, course.description)" ng-href="#/{{course.name}}">{{ course.name }}</a></li>
             </ul>
         </li>                        
         <li class="active">
-            <a href="#"><i class="fa fa-cube"></i> <span>Upload Results</span></a>
+            <a href="#" ng-click="loadFileUpload()"><i class="fa fa-cube"></i> <span>Upload Results</span></a>
         </li>
         <li class="title">Session</li>
         <li>
