@@ -20,6 +20,9 @@ app.controller(
 	function($scope, $http, $cookies, $window, $timeout, userProfile) {
 	var user_type = $cookies.get("user_type");
 	var user_id = $cookies.get("user_id");
+	if (user_id == "" || user_type == ""){
+		$window.location.href="login.php";
+	}
 	var current_course;
 
 	 $scope.sortType     = 'name';
