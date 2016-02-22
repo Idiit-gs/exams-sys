@@ -1,20 +1,14 @@
 window.fd = {logging: false};
 var options = {iframe: {url: 'upload.php'}}
-// 'zone' is an ID but you can also give a DOM node:
 var zone = new FileDrop('my-dropzone', options)
 
-// Do something when a user chooses or drops a file:
 zone.event('send', function (files) {
-  // FileList might contain multiple items.
   files.each(function (file) {
   	file.readData(
       function (str) { processCSVFile(str); },
-      function (e) { alert('Terrible error!') },
+      function (e) { alert('Unable to read file content, please try again') },
       'text'
     )
-
-    // Send the file:
-    //file.sendTo('upload.php')
   })
 })
 
@@ -24,7 +18,6 @@ zone.event('iframeDone', function (xhr) {
 
 function processCSVFile(str){
 	var json = CSV2JSON(str);
-	$("#show-uploaded").modal();
 	var string="";
 	for (var i = 0; i < json.length; i++) {
 		var reg_num = json[i].reg_num;
@@ -37,9 +30,17 @@ function processCSVFile(str){
 			continue;
 		}
 
-		string += "<tr><td>"+index+"</td><td>"+reg_num+"</td><td>"+first_name+"</td><td>"+last_name+"</td><td>"+score+"</td></tr>";
+		string += "<tr><td>"+index+"</td><td contenteditable>"+reg_num+"</td><td contenteditable>"+
+                  first_name+"</td><td contenteditable>"+
+                  last_name+"</td><td contenteditable>"+
+                  score+"</td></tr>";
 	}
-	$("#uploaded-csv-file").html(string);
+    if (string == ""){
+        alert("Invalid file detected, you are allowed upload the following types of file:\n\t1. A text file with a csv formatted content");
+    } else {
+        $("#uploaded-csv-file").html(string);
+        $("#show-uploaded").modal({backdrop: 'static', keyboard: false});
+    }
 }
 
 function CSVToArray(strData, strDelimiter) {
