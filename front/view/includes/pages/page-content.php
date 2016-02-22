@@ -112,17 +112,19 @@
         <div id="file-upload-section" ng-show="SHOWFILEUPLOAD">
 
             <div id="my-dropzone" class="dev-widget alert alert-primary" style="border: 1px solid #ccc !important; height: 200px !important; padding-top: 80px;">
-                <div class="text-center"><span>Drop files in here or click browse to upload a file</span></div>
+                <div class="text-center"><span>Drop files in here or click the button to upload a file</span></div>
             </div>
 
             <div class="modal fade" style="" id="show-uploaded" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" style="margin-left: 28.3%;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                         <h4 class="modal-title" id="largeModalHead">File Uploaded Successfully 
                         <small>Please verify the content of the file before we save it to the database</small>
-                        <button type="button" class="btn btn-primary btn-lg pull-right" data-dismiss="modal"><i class="fa fa-save"></i> Save</button>
+                        <p class="pull-right">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                        <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-save"></i> Save</button>
+                        </p>
                         </h4> 
                     </div>
                     <div class="modal-body">
@@ -145,8 +147,8 @@
                            </div>
                         </div>
 
-                        <div class="table-responsive"  style="height: 380px !important; overflow-y: scroll">
-                                <table class="table">
+                        <div class="table-responsive"  style="height: 350px !important; overflow-y: scroll">
+                                <table class="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>S/N</th>
@@ -162,12 +164,8 @@
                                 </table>
                             </div>
                     </div>
-                    <div class="modal-footer">                    
-                    </div>
                 </div>
             </div>
-        </div>
-
         </div>
     </div>
     <!-- ./boxed layout -->
