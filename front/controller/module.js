@@ -1,1 +1,0 @@
-require("./lecturer-module.js");
