@@ -20,7 +20,7 @@
                 </div>  
             </div>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-responsive" datatable="ng" dt-options="dtOptions">
+                <table class="table table-bordered table-responsive" datatable="ng" dt-options="dtOptions">
                     <thead>
                         <tr>
                             <th>S/N</th>
@@ -40,19 +40,21 @@
                                 </a>
                             </th>
                             <th>Grade</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
+                            <th style="width: 5px !important;">Save</th>
+                            <th style="width: 5px !important;">Delete</th>
                         </tr>
                     </thead>                               
                     <tbody>
                         <tr ng:repeat="score in SCORES | orderBy:sortType:sortReverse | filter:searchName">
                             <td>{{$index + 1}}</td>
-                            <td>{{score.student_info.id}}</td>
-                            <td>{{score.student_info.first_name + " " + score.student_info.last_name}}</td>
-                            <td>{{score.score_info.score}}</td>
-                            <td>{{score.score_info.grade}}</td>
-                            <td><center><a ng-href="#score/edit/{{score.student_info.id}}"><i class="fa fa-edit text-warning" style="font-size: 2em;"></i></a></center></td>
-                            <td><center><a ng-href="#score/delete/{{score.student_info.id}}"><i class="fa fa-close text-danger" style="font-size: 2em;"></i></a></center></td>
+                            <td contenteditable="">{{score.student_info.id}}</td>
+                            <td contenteditable="">{{score.student_info.first_name + " " + score.student_info.last_name}}</td>
+                            <td contenteditable="">{{score.score_info.score}}</td>
+                            <td contenteditable="">{{score.score_info.grade}}</td>
+                            <td ><center><a ng-href="#score/edit/{{score.student_info.id}}" class="btn btn-success btn-sm btn-clean"
+                             style="border: 0px !important;"><i class="fa fa-save text-success" style="font-size: 2em;"></i></a></center></td>
+                            <td><center><a ng-href="#score/delete/{{score.student_info.id}}" class="btn btn-danger btn-sm btn-clean"
+                             style="border: 0px !important;" ng-click="deleteScore(score.student_info.id)"><i class="fa fa-close text-danger" style="font-size: 2em;"></i></a></center></td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,7 +112,10 @@
         </div>
 
         <div id="file-upload-section" ng-show="SHOWFILEUPLOAD">
-
+            <div class="alert alert-danger alert-dismissible" id="invalid-upload" role="alert">
+                 <i class="fa fa-warning"></i> &nbsp;
+                <strong>Invalid File Type Detected!</strong> You are allowed to upload only a csv-formatted text file.
+            </div>
             <div id="my-dropzone" class="dev-widget alert alert-primary" style="border: 1px solid #ccc !important; height: 200px !important; padding-top: 80px;">
                 <div class="text-center"><span>Drop files in here or click the button to upload a file</span></div>
             </div>
@@ -147,15 +152,16 @@
                            </div>
                         </div>
 
-                        <div class="table-responsive"  style="height: 350px !important; overflow-y: scroll">
+                        <div class="table-responsive"  style="height: 300px !important; overflow-y: scroll">
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>S/N</th>
+                                            <th class="active" style="width: 5px;">S/N</th>
                                             <th>Reg. No</th>
                                             <th>First Name</th>
                                             <th>Last Name</th>
-                                            <th>Score</th>
+                                            <th style="width: 7px;">Score</th>
+                                            <th style="width: 10px;">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody id="uploaded-csv-file">
@@ -163,6 +169,13 @@
                                     </tbody>
                                 </table>
                             </div>
+                    </div>
+                    <div class="modal-footer">
+                         <button type="button" class="pull-left btn btn-clean btn-rounded btn-info btn-sm"
+                            data-container="body" data-toggle="popover" title="Help information, some other nice text" data-placement="top" data-content="Write comprehensive help text in here. F.ex: Click a cell to edit its contentWrite comprehensive help text in here. F.ex: Click a cell to edit its content. Write comprehensive help text in here. F.ex: Click a cell to edit its content. Write comprehensive help text in here. F.ex: Click a cell to edit its content. Write comprehensive help text in here. F.ex: Click a cell to edit its content"
+                         ><i class="fa fa-info"></i></button>  
+                         <button type="button" class="btn btn-info btn-sm" id="undo-last-action"><i class="fa fa-undo"></i> Undo Delete</button>   
+                         <button type="button" class="btn btn-info btn-sm" id="add-new-record"><i class="fa fa-user-plus"></i> Add new record</button>            
                     </div>
                 </div>
             </div>

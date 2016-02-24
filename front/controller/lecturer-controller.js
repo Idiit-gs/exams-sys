@@ -72,6 +72,16 @@ app.controller(
 			$scope.SHOWFILEUPLOAD = false;
 		});
 	};
+
+	$scope.deleteScore = function(id){
+		if (typeof session == "undefined"){
+			$scope.SESSION = 1;
+		}
+		var session = $scope.SESSION;
+		$http.delete("http://www.idiit-gs.com/exrec/back/api/score/delete?student="+id+"&course="+current_course+"&session="+session).success(function(data){
+			alert("Record deleted successfully");
+		})
+	}
 	
 	$scope.loadDashboard = function(){
 		$scope.PAGE_TITLE_HEADER = "Dashboard";
